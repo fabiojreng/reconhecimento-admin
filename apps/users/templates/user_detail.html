@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Reconhecimento Facial - Detalhes do Usuário
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <main>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card text-center mt-3">
+          <div class="card-header">
+            Detalhes do Usuário
+          </div>
+          <div class="card-body" style="text-align: left;">
+            <div class="row mt-3 info-usuario">
+              <div class="col-md-3 container-image">
+                <img id="foto-usuario" src="{{ user.photo.url|default:'img/semfoto.jpg' }}" alt="Foto do Usuário" width="100%">
+              </div>
+              <div class="col-md-8">
+                <h4>Dados do Usuário</h4>
+                <div class="detalhe-usuario"><strong>Nome: </strong>{{ user.username }}</div>
+                <div><strong>CPF: </strong>{{ user.document }}</div>   
+                <div><strong>Matrícula: </strong>{{ user.registration_code }}</div>
+                <div><strong>Curso: </strong>{{ user.course }}</div>
+
+                <div class="mt-2">
+                  <a href="{% url 'user_update' user.user_id %}" class="btn-atualiza btn btn-warning">
+                    Atualizar Dados
+                  </a>
+                </div>
+
+                <div class="mt-2">
+                  <button type="button" class="btn-cadastra-foto btn btn-primary" data-bs-toggle="modal" data-bs-target="#CadastrarFoto">
+                    Cadastrar Foto
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frequência do Usuário -->
+        <div class="row mt-4">
+          <div class="col-md-12">
+            <div class="card text-center mt-3">
+              <div class="card-header">
+                Frequência do Usuário
+              </div>
+              <div class="listagem-usuarios">
+                <table class="table table-hover" id="dados-frequencia">
+                  <thead>
+                    <tr>
+                      <th scope="col">Data</th>
+                      <th scope="col">Dia da semana</th>
+                      <th scope="col">Hora</th>
+                      <th scope="col">Status</th>
+                    </tr>
+                  </thead>
+                  <!-- <tbody class="tbody">
+                    {% for frequencia in user.frequencias.all %}
+                      <tr>
+                        <td>{{ frequencia.data }}</td>
+                        <td>{{ frequencia.dia_semana }}</td>
+                        <td>{{ frequencia.hora }}</td>
+                        <td>{{ frequencia.status }}</td>
+                      </tr>
+                    {% empty %}
+                      <tr>
+                        <td colspan="4">Nenhuma frequência registrada.</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody> -->
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="modal fade" id="CadastrarFoto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="CadastrarFotoLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="CadastrarFotoLabel">Cadastrar Foto do Usuário</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="#" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="photo">Adicionar Foto:</label>
+            <input type="file" class="form-control" name="photo" id="photo">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

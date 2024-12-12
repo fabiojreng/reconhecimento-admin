@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Cadastro de Usuários
+{% endblock %}
+
+{% block content %}
+<main>
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class="card text-center">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+        <div class="card-header">
+          Cadastro de Usuários
+        </div>
+        <div class="card-body" style="text-align: left;">
+          <p class="card-text">* Preencha os dados do usuário corretamente</p>
+          <form method="post" enctype="multipart/form-data" action="{% url 'user_create' %}">
+            {% csrf_token %}
+            
+            <div class="form-group mb-3">
+              <label class="mb-1" for="id_username">Nome</label>
+              <input type="text" class="form-control" id="id_username" name="username" value="{{ form.username.value|default:'' }}" placeholder="Nome">
+              {% if form.username.errors %}
+                <div class="text-danger small">{{ form.username.errors|join:', ' }}</div>
+              {% endif %}
+            </div>
+            
+            <div class="form-group mb-3">
+              <label class="mb-1" for="id_document">CPF</label>
+              <input type="text" class="form-control" id="id_document" name="document" value="{{ form.document.value|default:'' }}" placeholder="CPF">
+              {% if form.document.errors %}
+                <div class="text-danger small">{{ form.document.errors|join:', ' }}</div>
+              {% endif %}
+            </div>
+            
+            <div class="form-group mb-3">
+              <label class="mb-1" for="id_registration_code">Matrícula</label>
+              <input type="text" class="form-control" id="id_registration_code" name="registration_code" value="{{ form.registration_code.value|default:'' }}" placeholder="Matrícula">
+              {% if form.registration_code.errors %}
+                <div class="text-danger small">{{ form.registration_code.errors|join:', ' }}</div>
+              {% endif %}
+            </div>
+            
+            <div class="form-group mb-3">
+              <label class="mb-1" for="id_course">Curso</label>
+              <input type="text" class="form-control" id="id_course" name="course" value="{{ form.course.value|default:'' }}" placeholder="Curso">
+              {% if form.course.errors %}
+                <div class="text-danger small">{{ form.course.errors|join:', ' }}</div>
+              {% endif %}
+            </div>
+            
+            <div class="form-group mb-3">
+              <label class="mb-1" for="id_photo">Foto</label>
+              <input type="file" class="form-control" id="id_photo" name="photo">
+              {% if form.photo.errors %}
+                <div class="text-danger small">{{ form.photo.errors|join:', ' }}</div>
+              {% endif %}
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

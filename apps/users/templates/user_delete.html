@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Deletar Usuário
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h3 class="display-5">Deletar Usuário</h3>
+
+    <div class="card">
+      <div class="card-body">
+        <p class="card-text">Tem certeza de que deseja excluir o usuário <strong>{{ user.username }}</strong>?</p>
+
+        <form method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Deletar</button>
+        </form>
+        
+        <a href="{% url 'user_list' %}" class="btn btn-secondary mt-3">Cancelar</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

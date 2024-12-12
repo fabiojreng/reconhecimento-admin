@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Programas Cadastrados
+{% endblock %}
+
+{% block content %}
+<main>
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class="card text-center">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+        <div class="card-header">
+          Listagem de Programas
+        </div>
+        <div class="card-body">
+          <p class="card-text">* Listagem de programas cadastrados.</p>
+          <form method="get" action="{% url 'program_list' %}" class="mb-4">
+            <div class="input-group">
+              <input type="text" class="form-control" name="name" placeholder="Nome" value="{{ request.GET.name }}">
+              <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+            </div>
+          </form>
+
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th style="text-align: center;" colspan="2">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for program in programs %}
+                <tr>
+                  <td>{{ program.program_id }}</td>
+                  <td>{{ program.name }}</td>
+                  <td>{{ program.description }}</td>
+                  <td>
+                    <div class="d-flex gap-2 justify-content-center">
+                      <a href="{% url 'program_detail' program.program_id %}" class="btn btn-info btn-sm">
+                        <i class="bi bi-eye"></i>
+                      </a>
+                      <a href="{% url 'program_update' program.program_id %}" class="btn btn-warning btn-sm">
+                        <i class="bi bi-pencil"></i>
+                      </a>
+                      <a href="{% url 'program_delete' program.program_id %}" class="btn btn-danger btn-sm">
+                        <i class="bi bi-trash"></i>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% include 'components/_pagination.html' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

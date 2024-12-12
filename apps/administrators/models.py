@@ -27,7 +27,7 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class Administrator(AbstractBaseUser, PermissionsMixin):
     adminstrator_id = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False
     )

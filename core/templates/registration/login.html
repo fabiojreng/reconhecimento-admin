@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Reconhecimento Facial{% endblock %}
+
+{% block content %}
+<section style="height: 100vh;">
+  <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%); height: 100vh;">
+    <div class="container">
+      <div class="row gx-lg-5 align-items-center">
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <h1 class="my-5 display-3 fw-bold ls-tight">
+            Login 
+            <span class="text-primary">Reconhecimento Facial</span>
+          </h1>
+          <p style="color: hsl(217, 10%, 50.8%)">
+            A visão computacional é um dos ramos da inteligência artificial que estuda o processamento de imagens do mundo real por um computador. Em outras palavras, essa área investiga maneiras de dar às máquinas a capacidade de interpretar informações visualmente.
+          </p>
+        </div>
+
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <div class="card">
+            <div class="card-body py-5 px-md-5">
+              <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+
+                <div class="form-outline mb-4">
+                  <label for="username">Email</label>
+                  <input type="text" class="form-control" id="username" name="username" placeholder="Insira seu email" required>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="senha">Senha</label>
+                  <input type="password" id="password" name="password" class="form-control" placeholder="Insira sua senha" required/>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mb-4">
+                  Entrar
+                </button>
+
+                {% if form.errors %}
+                <div class="alert alert-danger mt-3">
+                  <ul class="mb-0">
+                    {% for field in form %}
+                      {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                      {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                      <li>{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+                {% endif %}
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

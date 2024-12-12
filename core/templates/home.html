@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="card text-center mt-3">
+      <div class="card-header">O que é?</div>
+      <div class="card-body">
+        <h5>Visão Computacional: O que é?</h5>
+        <p class="card-text">
+          A visão computacional é um dos ramos da inteligência artificial que estuda o processamento de imagens do mundo real por um computador. Em outras palavras, essa área investiga maneiras de dar às máquinas a capacidade de interpretar informações visualmente.
+        </p>
+        <a href="https://pt.wikipedia.org/wiki/Vis%C3%A3o_computacional" target="_blank" class="btn btn-primary">+ informações</a>
+      </div>
+      <div class="card-footer text-muted">2 dias atrás</div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-3">
+  <div class="col-md-4">
+    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+      <div class="card-header">Últimos Editais</div>
+      <div class="card-body">
+        <h5 class="card-title">Publicados Recentemente</h5>
+        <ul>
+          <li>Auxílio Digital</li>
+          <li>Auxílio Alimentação</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+      <div class="card-header">Alunos Cadastrados Recentemente</div>
+      <div class="card-body alunos-recentes">
+        <ul>
+          {% for user in users %}
+            <li>{{ user.username }}</li>
+          {% endfor %}
+        </ul>
+        {% if not users %}
+          <li>Nenhum usuário foi cadastrado ainda.</li>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+      <div class="card-header">Avisos</div>
+      <div class="card-body">
+        <h5 class="card-title">Tarefas a serem concluídas</h5>
+        <ul>
+          <li>Notificar alunos...</li>
+          <li>Visita Social</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

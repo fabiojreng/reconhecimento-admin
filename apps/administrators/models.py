@@ -28,7 +28,7 @@ class CustomUserManager(BaseUserManager):
 
 
 class Administrator(AbstractBaseUser, PermissionsMixin):
-    adminstrator_id = models.UUIDField(
+    administrator_id = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False
     )
     email = models.EmailField(unique=True, verbose_name="Email")
@@ -41,7 +41,6 @@ class Administrator(AbstractBaseUser, PermissionsMixin):
     photo = models.ImageField(
         upload_to="admin_photos/", blank=True, verbose_name="Foto"
     )
-    key = models.CharField(max_length=100, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
@@ -58,8 +57,3 @@ class Administrator(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.name
-
-    def save(self, *args, **kwargs):
-        if self.photo and not self.key:
-            self.key = validate_image_key(self.photo.name)
-        super().save(*args, **kwargs)

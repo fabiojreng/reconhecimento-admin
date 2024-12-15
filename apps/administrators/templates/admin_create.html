@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Cadastro de Administradores
+{% endblock %}
+
+{% block content %}
+<main>
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class="card text-center">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+        <div class="card-header">
+          Cadastro de Administradores
+        </div>
+        <div class="card-body" style="text-align: left;">
+          <p class="card-text">* Preencha os dados do administrador corretamente</p>
+          <form method="post" enctype="multipart/form-data" action="{% url 'admin_create' %}">
+            {% csrf_token %}
+
+            <div class="form-group mb-3">
+              <label class="mb-1" for="id_name">Nome</label>
+              {{ form.name }}
+              {% if form.name.errors %}
+                <div class="text-danger small">{{ form.name.errors|join:', ' }}</div>
+              {% endif %}
+            </div>
+
+            <div class="form-group mb-3">
+              <label class="mb-1" for="id_email">Email</label>
+              {{ form.email }}
+              {% if form.email.errors %}
+                <div class="text-danger small">{{ form.email.errors|join:', ' }}</div>
+              {% endif %}
+            </div>
+
+            <div class="form-group mb-3">
+              <label class="mb-1" for="id_password">Senha</label>
+              {{ form.password }}
+              {% if form.password.errors %}
+                <div class="text-danger small">{{ form.password.errors|join:', ' }}</div>
+              {% endif %}
+            </div>
+
+            <div class="form-group mb-3">
+              <label class="mb-1" for="id_document">CPF</label>
+              {{ form.document }}
+              {% if form.document.errors %}
+                <div class="text-danger small">{{ form.document.errors|join:', ' }}</div>
+              {% endif %}
+            </div>
+
+            <div class="form-group mb-3">
+              <label class="mb-1" for="id_registration_code">Código de Matrícula</label>
+              {{ form.registration_code }}
+              {% if form.registration_code.errors %}
+                <div class="text-danger small">{{ form.registration_code.errors|join:', ' }}</div>
+              {% endif %}
+            </div>
+
+            <div class="form-group mb-3">
+              <label class="mb-1" for="id_photo">Foto</label>
+              {{ form.photo }}
+              {% if form.photo.errors %}
+                <div class="text-danger small">{{ form.photo.errors|join:', ' }}</div>
+              {% endif %}
+            </div>
+
+            <div class="form-group mb-3">
+              <label class="mb-1" for="id_groups">Grupos de Permissão</label>
+              {{ form.groups }}
+              {% if form.groups.errors %}
+                <div class="text-danger small">{{ form.groups.errors|join:', ' }}</div>
+              {% endif %}
+              <a href="{% url 'group_create' %}" class="btn btn-primary">Criar Novo Grupo</a>
+            </div>
+
+            <div class="form-group mb-3">
+              <label class="mb-1" for="id_permissions">Permissões</label>
+              {{ form.permissions }}
+              {% if form.permissions.errors %}
+                <div class="text-danger small">{{ form.permissions.errors|join:', ' }}</div>
+              {% endif %}
+            </div>
+
+            <div class="form-group mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="id_is_active" name="is_active" {{ form.is_active.value|yesno:"checked," }}>
+              <label class="form-check-label" for="id_is_active">É ativo?</label>
+            </div>
+
+            <div class="form-group mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="id_is_staff" name="is_staff" {{ form.is_staff.value|yesno:"checked," }}>
+              <label class="form-check-label" for="id_is_staff">É staff?</label>
+            </div>
+
+            <div class="form-group mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="id_is_superuser" name="is_superuser" {{ form.is_superuser.value|yesno:"checked," }}>
+              <label class="form-check-label" for="id_is_superuser">É superusuário?</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
+          </form>
+          <a href="{% url 'admin_list' %}" class="btn btn-danger mt-3">Cancelar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

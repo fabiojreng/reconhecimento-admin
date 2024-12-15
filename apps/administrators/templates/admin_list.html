@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Reconhecimento Facial - Administradores
+{% endblock %}
+
+{% block content %}
+  <main>
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <div class="card text-center">
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+          <div class="card-header">
+            Consulta de Administradores
+          </div>
+          <div class="card-body">
+            <p class="card-text">* Listagem de administradores cadastrados.</p>
+            <form method="get" action="{% url 'admin_list' %}" class="mb-4">
+              <div class="input-group">
+                <input type="text" class="form-control" name="name" placeholder="Nome" value="{{ request.GET.name }}">
+                <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+              </div>
+            </form>
+
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nome</th>
+                  <th>CPF</th>
+                  <th>Matrícula</th>
+                  <th>Ativo</th>
+                  <th>Staff</th>
+                  <th>Super Administrador</th>
+
+                  <th style="text-align: center;" colspan="2">Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for administrator in administrators %}
+                  <tr>
+                    <td>{{ administrator.administrator_id }}</td>
+                    <td>{{ administrator.name }}</td>
+                    <td>{{ administrator.document }}</td>
+                    <td>{{ administrator.registration_code }}</td>
+                    <td>{{ administrator.is_active }}</td>
+                    <td>{{ administrator.is_staff }}</td>
+                    <td>{{ administrator.is_superuser }}</td>
+                    <td>
+                      <div class="d-flex gap-2 justify-content-center">
+                        <a href="{% url 'admin_detail' administrator.administrator_id%}" class="btn btn-info btn-sm">
+                          <i class="bi bi-eye"></i>
+                        </a>
+                        <a href="{% url 'admin_update' administrator.administrator_id %}" class="btn btn-warning btn-sm">
+                          <i class="bi bi-pencil"></i>
+                        </a>
+                        <a href="{% url 'admin_delete' administrator.administrator_id %}" class="btn btn-danger btn-sm">
+                          <i class="bi bi-trash"></i>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            {% include 'components/_pagination.html' %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+{% endblock %}

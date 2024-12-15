@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Grupos
+{% endblock %}
+
+{% block content %}
+<main>
+  <div class="row mt-4">
+    <div class="col-md-8 offset-md-2">
+      <h3 class="text-center">Lista de Grupos</h3>
+      <a href="{% url 'group_create' %}" class="btn btn-primary mb-3">Criar Novo Grupo</a>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for group in groups %}
+          <tr>
+            <td>{{ group.name }}</td>
+            <td>
+              <a href="{% url 'group_update' group.id %}" class="btn btn-warning btn-sm">
+                <i class="bi bi-pencil"></i>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+{% endblock %}

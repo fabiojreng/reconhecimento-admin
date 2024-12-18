@@ -53,20 +53,20 @@
                       <th scope="col">Status</th>
                     </tr>
                   </thead>
-                  <!-- <tbody class="tbody">
-                    {% for frequencia in user.frequencias.all %}
-                      <tr>
-                        <td>{{ frequencia.data }}</td>
-                        <td>{{ frequencia.dia_semana }}</td>
-                        <td>{{ frequencia.hora }}</td>
-                        <td>{{ frequencia.status }}</td>
-                      </tr>
-                    {% empty %}
-                      <tr>
-                        <td colspan="4">Nenhuma frequência registrada.</td>
-                      </tr>
-                    {% endfor %}
-                  </tbody> -->
+                  <tbody class="tbody">
+                    {% for log in recognition_logs %}
+                    <tr>
+                      <td>{{ log.data }}</td>
+                      <td>{{ log.dia_semana|capfirst }}</td>
+                      <td>{{ log.hora }}</td>
+                      <td>{{ log.status }}</td>
+                    </tr>
+                  {% empty %}
+                    <tr>
+                      <td colspan="4">Nenhuma frequência registrada.</td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
                 </table>
               </div>
             </div>

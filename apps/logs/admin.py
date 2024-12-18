@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Log, RecognitionLog
 
-# Register your models here.
+admin.site.register(Log)
+admin.site.register(RecognitionLog)

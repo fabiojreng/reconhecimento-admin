@@ -12,7 +12,7 @@ class Log(models.Model):
     )
 
     def __str__(self):
-        return f"Log {self.log_id} at {self.access_at}"
+        return f"{self.log_id} - {self.access_at}"
 
 
 class RecognitionLog(models.Model):
@@ -26,4 +26,4 @@ class RecognitionLog(models.Model):
     status = models.CharField(max_length=30)
 
     def __str__(self):
-        return f"Recognition {self.recognition_id} for {self.user.name}"
+        return f"{self.recognition_id} - {self.user_id}"

@@ -31,7 +31,6 @@
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th>ID</th>
                   <th>Nome</th>
                   <th>CPF</th>
                   <th>Matrícula</th>
@@ -45,7 +44,6 @@
               <tbody>
                 {% for administrator in administrators %}
                   <tr>
-                    <td>{{ administrator.administrator_id }}</td>
                     <td>{{ administrator.name }}</td>
                     <td>{{ administrator.document }}</td>
                     <td>{{ administrator.registration_code }}</td>

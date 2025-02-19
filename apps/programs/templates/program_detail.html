@@ -19,13 +19,7 @@
             <div><strong>Descrição: </strong>{{ program.description }}</div>
             <div><strong>Criado em: </strong>{{ program.created_at }}</div>
             <div><strong>Atualizado em: </strong>{{ program.updated_at }}</div>
-            
-            <div class="mt-2">
-              <a href="{% url 'program_update' program.program_id %}" class="btn btn-warning">
-                Atualizar Dados
-              </a>
-            </div>
-            
+                        
             <a href="{% url 'program_list' %}" class="btn btn-primary mt-3">Voltar</a>
           </div>
         </div>
